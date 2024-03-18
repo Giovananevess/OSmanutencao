@@ -1,0 +1,7 @@
+{
+  "name": "OSmanutencao",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
