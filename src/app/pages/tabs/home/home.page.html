@@ -1,0 +1,116 @@
+<ion-header class="ion-no-border" [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="m1"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Suas Ordens</ion-title>
+    <ion-buttons slot="end" (click)="presentAlert()">
+      <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+      <ion-badge slot="end" color="danger"
+        style="width: -0.1px !important;  position: absolute; right: -0.2rem; top: -2px;">&nbsp;</ion-badge>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <!-- <div class="ion-text-center ion-margin-top">
+    <ion-spinner color="primary"></ion-spinner>
+  </div> -->
+
+  <!-- <ion-refresher slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher> -->
+
+
+  <ion-grid>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size-md="6" offset-md="3">
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+        </ion-col>
+        <ion-col size="8">
+          <ion-item lines="none">
+            <ion-label>
+              <p>Olá,</p>
+              <p>Aqui estão suas ordens</p>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item slot="end">
+            <ion-button color="primary">
+              <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="6" offset-md="3">
+          <ion-card color="primary" class="ion-text-center">
+            <ion-card-content>
+              <ion-icon style="width: 30px; height: 30px;" name="chatbubbles-outline" color="light"></ion-icon>
+              Mensagens
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size-md="6" offset-md="3">
+          <ion-card color="primary" class="ion-text-center">
+            <ion-card-content>
+              <ion-icon style="width: 30px; height: 30px;" name="document-text-outline" color="light"></ion-icon>
+              Listar ordens
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <ion-card>
+          <ion-card-content>
+            <ion-list class="ion-no-padding">
+              <ion-item lines="none" class="ion-no-padding field">
+                <ion-label>
+                  <h2> Nome da ordem </h2>
+                </ion-label>
+              </ion-item>
+
+              <ion-item lines="none" class="ion-no-padding field">
+                <ion-icon name="timer-outline" color="primary" class="ion-no-margin icon"></ion-icon>
+                <ion-label>
+                  <h2> Prioridade </h2>
+                </ion-label>
+              </ion-item>
+
+              <ion-item lines="none" class="ion-no-padding field">
+                <ion-icon name="build-outline" color="primary" class="ion-no-margin icon"></ion-icon>
+                <ion-label>
+                  <h2> Modelo da máquina </h2>
+                </ion-label>
+              </ion-item>
+
+              <ion-item lines="none" class="ion-no-padding field">
+                <ion-icon name="calendar-outline" color="primary" class="ion-no-margin icon"></ion-icon>
+                <ion-label>
+                  <h2> data da solicitação </h2>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+          <ion-card-content class="ion-text-end">
+            <ion-icon style="width: 30px; height: 30px;" name="create-outline"></ion-icon>
+            <ion-icon style="width: 30px; height: 30px;" color="danger" name="trash-outline"></ion-icon>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

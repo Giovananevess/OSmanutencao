@@ -1,0 +1,61 @@
+<ion-content [fullscreen]="true" class="ion-padding content">
+  <ion-grid class="ion-margin-top ion-padding-top">
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <div class="img">
+          <h2>Meu Perfil</h2>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <form>
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="6" offset-md="3">
+          <ion-list>
+            <ion-item>
+              <ion-avatar>
+                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+            </ion-item>
+            <ion-item>
+              <ion-input type="name" name="name" label="Nome" labelPlacement="floating" placeholder="Digite seu nome"
+                name required ngModel>
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="email" name="email" label="Sobrenome" labelPlacement="floating"
+                placeholder="Digite seu sobrenome" email required ngModel>
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="email" name="email" label="CEP" labelPlacement="floating" placeholder="Digite seu CEP"
+                email required ngModel>
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" name="text" label="Nome da rua" labelPlacement="floating"
+                placeholder="Digite o sua endereço" email required ngModel>
+              </ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="tel" name="email" label="Celular" labelPlacement="floating"
+                placeholder="Digite seu número de celular" email required ngModel>
+              </ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+  <ion-row>
+    <ion-col size-md="6" offset-md="3">
+      <ion-button type="submit" color="primary" expand="block">
+        Salvar
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>
