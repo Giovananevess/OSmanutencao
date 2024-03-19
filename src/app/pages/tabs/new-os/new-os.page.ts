@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewOsPage implements OnInit {
 
+  orders: any[] = [{}]; // Inicializa com um formulário
+
+  addOrder() {
+    this.orders.push({});
+  }
   constructor() { }
 
   ngOnInit() {
