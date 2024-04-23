@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+
 
 @Component({
   selector: 'app-auth',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthPage implements OnInit {
 
-  constructor() { }
+  loading = false
+
+
+  constructor(
+    private readonly formBuilder: FormBuilder
+  ) { }
 
   ngOnInit() {
   }

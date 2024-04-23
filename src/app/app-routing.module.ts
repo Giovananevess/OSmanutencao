@@ -9,10 +9,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'home',
-    loadChildren: () => import('./pages/tabs/home/home.module').then(m => m.HomePageModule)
-  },
-  {
     path: 'auth',
     loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthPageModule)
   },
@@ -27,14 +23,6 @@ const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule)
-  },
-  {
-    path: 'new-os',
-    loadChildren: () => import('./pages/tabs/new-os/new-os.module').then(m => m.NewOsPageModule)
-  },
-  {
-    path: 'profile-users',
-    loadChildren: () => import('./pages/tabs/profile-users/profile-users.module').then(m => m.ProfileUsersPageModule)
   },
   {
     path: 'modal-os',

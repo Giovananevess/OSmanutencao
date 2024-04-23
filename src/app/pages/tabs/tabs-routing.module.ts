@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
 
+
 const routes: Routes = [
   {
     path: '',
@@ -13,7 +14,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+            loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
+
           }
         ]
       },
