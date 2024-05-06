@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { StorageService } from './shared/services/storage.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,10 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(
+    private router: Router,
+    private storage: StorageService,
+    private loadingCtrl: LoadingController
+  ) { }
+
 }

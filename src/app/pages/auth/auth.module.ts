@@ -13,7 +13,6 @@ import { AuthPage } from './auth.page';
     ReactiveFormsModule,
     IonicModule,
     AuthPageRoutingModule,
-
   ],
   declarations: [AuthPage]
 })
