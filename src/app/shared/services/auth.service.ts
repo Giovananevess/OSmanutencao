@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, delay, from } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { ChangePassword, Identify, Login, LoginResponse } from '../models/auth.model';
+import { ChangePassword, CheckUser, Login, LoginResponse } from '../models/auth.model';
 import { StorageService } from './storage.service';
 
 @Injectable({
@@ -33,8 +33,8 @@ export class AuthService {
     return this.http.post<LoginResponse>(`${this.API}/users/login`, login);
   }
 
-  identify(): Observable<Identify> {
-    return this.http.get<Identify>(`${this.API}/users/identify`);
+  checkUser(): Observable<CheckUser> {
+    return this.http.get<CheckUser>(`${this.API}/users/checkuser`);
   }
 
   changePassword(id: number, values: ChangePassword): Observable<ChangePassword> {

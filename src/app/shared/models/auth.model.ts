@@ -10,7 +10,7 @@ export interface LoginResponse {
   // cargo: string;
 }
 
-export interface Identify {
+export interface CheckUser {
   nome: string;
   email: string;
   cargo: string;

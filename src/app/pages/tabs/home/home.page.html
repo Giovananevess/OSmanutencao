@@ -73,42 +73,42 @@
 
     <ion-row>
       <ion-col size-md="6" offset-md="3">
-        <ion-card>
+        <ion-card *ngFor="let order of orderServices">
           <ion-card-content>
             <ion-list class="ion-no-padding">
               <ion-item lines="none" class="ion-no-padding field">
-                <ion-label>aaaaaaaaaa</ion-label>
+                <ion-label>{{ order.title }}</ion-label>
               </ion-item>
 
               <ion-item lines="none" class="ion-no-padding field">
                 <ion-icon name="timer-outline" color="primary" class="ion-no-margin icon"></ion-icon>
                 <ion-label>
-                  <h2> Prioridade </h2>
+                  <ion-label>{{ order.priority }}</ion-label>
                 </ion-label>
               </ion-item>
 
               <ion-item lines="none" class="ion-no-padding field">
                 <ion-icon name="build-outline" color="primary" class="ion-no-margin icon"></ion-icon>
                 <ion-label>
-                  <h2> Modelo da máquina </h2>
+                  <ion-label>{{ order.machine }}</ion-label>
                 </ion-label>
               </ion-item>
 
               <ion-item lines="none" class="ion-no-padding field">
                 <ion-icon name="calendar-outline" color="primary" class="ion-no-margin icon"></ion-icon>
                 <ion-label>
-                  <h2> data da solicitação </h2>
+                  <ion-label>{{ order.daymaintenance }}</ion-label>
                 </ion-label>
               </ion-item>
             </ion-list>
           </ion-card-content>
           <ion-card-content class="ion-text-end">
-            <ion-icon style="width: 30px; height: 30px;" name="create-outline"></ion-icon>
-            <ion-icon style="width: 30px; height: 30px;" color="danger" name="trash-outline"></ion-icon>
+            <ion-icon style="width: 30px; height: 30px;" name="create-outline" (click)="onShowOs(order.id)"></ion-icon>
+            <ion-icon style="width: 30px; height: 30px;" color="danger" name="trash-outline" button
+              (click)="deleteCall(order.id)"></ion-icon>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
-
   </ion-grid>
 </ion-content>
