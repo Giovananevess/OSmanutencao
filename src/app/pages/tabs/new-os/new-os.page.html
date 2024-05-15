@@ -1,91 +1,95 @@
-<ion-content [fullscreen]="true" class="ion-padding content">
-  <ion-grid class="ion-margin-top ion-padding-top">
-    <ion-row>
-      <ion-col size-md="6" offset-md="3">
-        <div class="img">
-          <h2>Criar uma nova ordem</h2>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Criar uma nova ordem</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <form *ngFor="let order of orders">
+<ion-content [fullscreen]="true" class="ion-padding content">
+  <form (ngSubmit)="criarChamado()">
     <ion-grid>
       <ion-row>
         <ion-col size-md="6" offset-md="3">
-          <ion-list>
+          <ion-list *ngFor="let order of orders; let i = index">
             <ion-item>
-              <ion-input type="name" name="name" label="Nome da ordem" labelPlacement="floating"
-                placeholder="Digite seu nome" name required ngModel>
-              </ion-input>
+              <ion-label position="floating">Nome da ordem</ion-label>
+              <ion-input type="text" name="name{{i}}" [(ngModel)]="order.title" required></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input type="email" name="email" label="Descrição do problema" labelPlacement="floating"
-                placeholder="Digite seu sobrenome" email required ngModel>
-              </ion-input>
+              <ion-label position="floating">Descrição do problema</ion-label>
+              <ion-input type="text" name="description{{i}}" [(ngModel)]="order.description" required></ion-input>
             </ion-item>
             <ion-item>
-              <ion-select label="Prioridade" placeholder="Nível Prioridade">
-                <ion-select-option value="Baixa">Baixa</ion-select-option>
+              <ion-label position="floating">Marca da Máquina</ion-label>
+              <ion-select name="brand{{i}}" [(ngModel)]="order.brand" required>
+                <ion-select-option value="BRAND1">JACTO</ion-select-option>
+                <ion-select-option value="Média">INRODA</ion-select-option>
+                <ion-select-option value="Alta">BALDAN</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Modelo da maquina</ion-label>
+              <ion-select name="{{i}}" [(ngModel)]="order.machine" required>
+                <ion-select-option value="MACHINE1">TESTE</ion-select-option>
+                <ion-select-option value="New Holland">New Holland</ion-select-option>
+                <ion-select-option value="Massey Ferguson">Massey Ferguson</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Prioridade</ion-label>
+              <ion-select name="priority{{i}}" [(ngModel)]="order.priority" required>
+                <ion-select-option value="LOW">Baixa</ion-select-option>
                 <ion-select-option value="Média">Média</ion-select-option>
                 <ion-select-option value="Alta">Alta</ion-select-option>
               </ion-select>
             </ion-item>
             <ion-item>
-              <ion-select placeholder="Selecione">
-                <div slot="label">Marca da máquina <ion-text color="danger">*</ion-text></div>
-                <ion-select-option value="apple">Jacto</ion-select-option>
-                <ion-select-option value="banana">New Holland</ion-select-option>
-                <ion-select-option value="orange">Massey Ferguson</ion-select-option>
-              </ion-select>
+              <ion-label position="floating">Imagem</ion-label>
+              <ion-input type="text" name="images{{i}}" [(ngModel)]="order.images" required></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input type="email" name="email" label="CEP" labelPlacement="floating" placeholder="Digite seu CEP"
-                email required ngModel>
-              </ion-input>
+              <ion-label position="floating">Manutenção Diária</ion-label>
+              <ion-input type="text" name="daymaintenance{{i}}" [(ngModel)]="order.daymaintenance" required></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input type="text" name="text" label="Nome da rua" labelPlacement="floating"
-                placeholder="Digite o sua endereço" email required ngModel>
-              </ion-input>
+              <ion-label position="floating">Manutenção Diária</ion-label>
+              <ion-input type="text" name="daymaintenance{{i}}" [(ngModel)]="order.daymaintenance" required
+                (click)="openDatePicker()"></ion-input>
+              <ion-datetime #dateTime presentation="date" [(ngModel)]="order.daymaintenance"
+                locale="sl-SI"></ion-datetime>
             </ion-item>
-            <ion-list>
-
-            </ion-list>
-            <ion-item>
-              <ion-input type="tel" name="email" label="Celular" labelPlacement="floating"
-                placeholder="Digite seu número de celular" email required ngModel>
-              </ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input name="password" label="Senha" labelPlacement="floating" placeholder="Entre com a senha"
-                required ngModel #passwordCtrl="ngModel"></ion-input>
-            </ion-item>
+            <ion-row>
+              <ion-col size-md="6" offset-md="3">
+                <ion-button type="submit" color="primary" expand="block">
+                  Câmera
+                  <ion-icon name="camera-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-margin-top gallery">
+              <ion-col>
+                <app-photo-gallery (imagePick)="onImagePick($event)"></app-photo-gallery>
+              </ion-col>
+            </ion-row>
           </ion-list>
         </ion-col>
       </ion-row>
     </ion-grid>
     <ion-row>
       <ion-col size-md="6" offset-md="3">
+        <ion-button type="button" color="primary" expand="block" (click)="addOrder()">
+          Adicionar Outro Pedido
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
         <ion-button type="submit" color="primary" expand="block">
-          Câmera
-          <ion-icon name="camera-outline"></ion-icon>
+          Registrar
         </ion-button>
       </ion-col>
     </ion-row>
   </form>
-  <ion-row>
-    <ion-col size-md="6" offset-md="3">
-      <ion-button type="button" color="primary" expand="block" (click)="addOrder()">
-        Adcionar mias uma ordem?
-      </ion-button>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col size-md="6" offset-md="3">
-      <ion-button type="submit" color="primary" expand="block">
-        Registrar
-      </ion-button>
-    </ion-col>
-  </ion-row>
 </ion-content>

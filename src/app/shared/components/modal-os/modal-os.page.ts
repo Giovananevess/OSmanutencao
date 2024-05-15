@@ -1,8 +1,10 @@
+import { Order } from 'src/app/shared/models/order';
 import { OrderService } from 'src/app/shared/services/order.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { DatePipe } from '@angular/common';
-import { Order } from '../../models/order';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal-os',
@@ -13,22 +15,33 @@ import { Order } from '../../models/order';
 export class ModalOsPage implements OnInit {
 
 
-  @Input() osData!: Order[];
+  @Input() osData: Order[] = [];
   relatorio: string = '';
   materiais: string = '';
   uploadedImages: any[] = [];
   id!: number;
 
+
   constructor(
     private modalCtrl: ModalController,
     private datePipe: DatePipe,
     private orderService: OrderService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private formBuilder: FormBuilder,
+    private router: Router,
   ) { }
 
   ngOnInit() {
-    console.log('OS Data: ', this.osData[0]);
-    this.id = this.osData[0].id;
+    if (this.osData.length > 0) {
+      console.log('OS Data: ', this.osData[0]);
+      this.id = this.osData[0].id;
+    }
+  }
+
+  orders: any[] = [{}]; // Inicializa com um formulário
+
+  addOrder() {
+    this.orders.push({});
   }
 
   onClose() {
@@ -41,6 +54,28 @@ export class ModalOsPage implements OnInit {
       this.uploadedImages.push(image);
     }
   }
+
+  // async editOrder() {
+  //   try {
+  //     if (this.osData.length > 0) {
+  //       const updatedOrder = this.osData[0];
+  //       await this.orderService.updateOrder(updatedOrder.id, updatedOrder).toPromise();
+  //       console.log('Ordem atualizada com sucesso');
+
+  //       // Navega para a página de consulta de ordens após 2 segundos
+  //       setTimeout(() => {
+  //         this.router.navigate(['/consultar/ordens']);
+  //       }, 2000);
+  //     } else {
+  //       console.error('Nenhuma ordem disponível para atualização');
+  //     }
+  //   } catch (error) {
+  //     console.error('Erro ao atualizar a ordem', error);
+  //     // Exibe o erro no console
+  //   }
+  // }
+
+
 
   // onConcludeOs() {
   //   if (!this.relatorio) {

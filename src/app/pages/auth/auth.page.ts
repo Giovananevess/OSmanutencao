@@ -59,12 +59,13 @@ export class AuthPage implements OnInit {
             //   })
 
             console.log('Usuário autenticado: ', res);
+            // Após um login bem-sucedido, armazene o ID do usuário no localStorage
+            localStorage.setItem('userId', res.userId);
             this.authService.setIsAuthenticated(true);
             await this.storage.set('token', res.token);
             loadingEl.dismiss();
             form.reset();
             this.router.navigate(['/tabs/home']);
-
           },
           error: async (err) => {
 

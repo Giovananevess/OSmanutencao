@@ -13,16 +13,17 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  create(order: Order) {
-    return this.http.post(this.API + '/orders', JSON.stringify(order));
+  create(orderData: FormData): Observable<Order> {
+    return this.http.post<Order>(this.API + '/orders/create', orderData);
   }
+
 
   getAll(): Observable<Order[]> {
     return this.http.get<Order[]>(this.API + '/orders');
   }
 
-  updateOrder(id: number, order: Order): Observable<any> {
-    return this.http.put(this.API + '/orders/' + id, JSON.stringify(order));
+  updateOrder(id: number, order: Order): Observable<Order> {
+    return this.http.patch<Order>(this.API + '/orders/' + id, JSON.stringify(order));
   }
 
   getOrderById(id: number): Observable<Order> {

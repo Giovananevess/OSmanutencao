@@ -3,13 +3,11 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="m1"></ion-menu-button>
     </ion-buttons>
-    <ion-title>Suas Ordens</ion-title>
     <ion-buttons slot="end" (click)="presentAlert()">
       <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
       <ion-badge slot="end" color="danger"
         style="width: -0.1px !important;  position: absolute; right: -0.2rem; top: -2px;">&nbsp;</ion-badge>
     </ion-buttons>
-
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
@@ -17,9 +15,9 @@
     <ion-spinner color="primary"></ion-spinner>
   </div> -->
 
-  <!-- <ion-refresher slot="fixed">
+  <ion-refresher slot="fixed">
     <ion-refresher-content></ion-refresher-content>
-  </ion-refresher> -->
+  </ion-refresher>
 
 
   <ion-grid>
@@ -33,8 +31,9 @@
         <ion-col size="8">
           <ion-item lines="none">
             <ion-label>
-              <p>Olá,</p>
-              <p>Aqui estão suas ordens</p>
+              <ion-text>Olá, {{ nomeDaConta }} !</ion-text>
+              <br>
+              <ion-text>Aqui esta suas ordens</ion-text>
             </ion-label>
           </ion-item>
         </ion-col>
@@ -51,7 +50,7 @@
 
     <ion-grid>
       <ion-row>
-        <ion-col size-md="6" offset-md="3">
+        <ion-col size-md="6" offset-md="3" (click)="navigateToFAQPage()">
           <ion-card color="primary" class="ion-text-center">
             <ion-card-content>
               <ion-icon style="width: 30px; height: 30px;" name="chatbubbles-outline" color="light"></ion-icon>
@@ -59,7 +58,7 @@
             </ion-card-content>
           </ion-card>
         </ion-col>
-        <ion-col size-md="6" offset-md="3">
+        <ion-col size-md="6" offset-md="3" (click)="navigateToOrdersPage()">
           <ion-card color="primary" class="ion-text-center">
             <ion-card-content>
               <ion-icon style="width: 30px; height: 30px;" name="document-text-outline" color="light"></ion-icon>
@@ -97,7 +96,7 @@
               <ion-item lines="none" class="ion-no-padding field">
                 <ion-icon name="calendar-outline" color="primary" class="ion-no-margin icon"></ion-icon>
                 <ion-label>
-                  <ion-label>{{ order.daymaintenance }}</ion-label>
+                  <ion-label>{{ order.daymaintenance | date:'dd/MM/yyyy' }}</ion-label>
                 </ion-label>
               </ion-item>
             </ion-list>

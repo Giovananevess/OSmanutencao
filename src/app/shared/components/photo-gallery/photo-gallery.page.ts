@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { PhotoService } from '../../services/photo.service';
 
 @Component({
   selector: 'app-photo-gallery',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PhotoGalleryPage implements OnInit {
 
-  constructor() { }
+  @Output() imagePick = new EventEmitter<string | File>();
 
-  ngOnInit() {
+  constructor(
+    public photoService: PhotoService
+  ) { }
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
+  async addPhotoToGallery() {
+    await this.photoService.addNewToGallery();
+    this.imagePick.emit(this.photoService.photos as any);
   }
 
 }

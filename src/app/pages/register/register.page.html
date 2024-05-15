@@ -10,50 +10,47 @@
     </ion-row>
   </ion-grid>
 
-  <form>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
     <ion-grid>
       <ion-row>
         <ion-col size-md="6" offset-md="3">
           <ion-list>
             <ion-item>
-              <ion-input type="name" name="name" label="Nome e sobrenome" labelPlacement="floating"
-                placeholder="Digite seu nome" name required ngModel>
-              </ion-input>
+              <ion-label position="floating">Nome</ion-label>
+              <ion-input formControlName="name" placeholder="Digite seu nome"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input type="email" name="email" label="E-mail" labelPlacement="floating"
-                placeholder="Entre com o e-mail" email required ngModel>
-              </ion-input>
+              <ion-label position="floating">E-mail</ion-label>
+              <ion-input formControlName="email" type="email" placeholder="Entre com o e-mail"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input type="email" name="email" label="Endereço" labelPlacement="floating"
-                placeholder="Entre com o e-mail" email required ngModel>
-              </ion-input>
+              <ion-label position="floating">Celular</ion-label>
+              <ion-input formControlName="phone" type="tel" placeholder="Digite seu número de celular"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input type="email" name="email" label="CEP" labelPlacement="floating"
-                placeholder="Entre com o e-mail" email required ngModel>
-              </ion-input>
+              <ion-label position="floating">Endereço</ion-label>
+              <ion-input formControlName="address" placeholder="Digite o endereço"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input type="tel" name="tel" label="Celular" labelPlacement="floating"
-                placeholder="Digite seu número de celular" email required ngModel>
-              </ion-input>
+              <ion-label position="floating">CEP</ion-label>
+              <ion-input formControlName="cep" type="text" placeholder="Digite o CEP"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input name="password" label="Senha" labelPlacement="floating" placeholder="Entre com a senha"
-                required></ion-input>
+              <ion-label position="floating">Senha</ion-label>
+              <ion-input formControlName="password" type="password" placeholder="Digite sua senha"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Confirme a senha</ion-label>
+              <ion-input formControlName="confirmpassword" type="password" placeholder="Digite sua senha"></ion-input>
             </ion-item>
           </ion-list>
         </ion-col>
       </ion-row>
     </ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <ion-button type="submit" color="primary" expand="block">Registrar</ion-button>
+      </ion-col>
+    </ion-row>
   </form>
-  <ion-row>
-    <ion-col size-md="6" offset-md="3">
-      <ion-button type="submit" color="primary" expand="block">
-        Registrar
-      </ion-button>
-    </ion-col>
-  </ion-row>
 </ion-content>

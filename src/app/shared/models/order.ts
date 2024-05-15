@@ -4,12 +4,28 @@ export interface Order {
   description: string;
   brand: string;
   machine: string;
-  priority: number;
+  priority: string;
+  images: string;
   daymaintenance: string;
   userId: number;
   createdAt: Date;
   updatedAt: Date;
+
 }
+
+// export interface UpdateOrder {
+//   title: string;
+//   description: string;
+//   brand: string;
+//   machine: string;
+//   priority: number;
+//   daymaintenance: string;
+//   userId: number;
+//   createdAt: Date;
+//   updatedAt: Date;
+//   latitude: number;
+//   longitude: number;
+// }
 
 export interface ImageOS {
   type1?: [{

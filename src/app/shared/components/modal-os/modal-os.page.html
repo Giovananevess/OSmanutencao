@@ -168,3 +168,72 @@
     </form>
   </ion-grid>
 </ion-content> -->
+<ion-toolbar color="primary">
+  <ion-icon name="arrow-back-outline" style="height: 30px; width: 30px; margin-left: 10px"
+    [routerLink]="['/tabs/home']"></ion-icon>
+</ion-toolbar>
+
+<ion-content [fullscreen]="true" class="ion-padding content">
+  <ion-grid class="ion-margin-top ion-padding-top">
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <div class="img">
+          <h2>Editar ordem</h2>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <form *ngFor="let order of orders">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="6" offset-md="3">
+          <ion-list>
+            <ion-item>
+              <ion-input type="text" name="title" label="Título da ordem" labelPlacement="floating"
+                [value]="osData.length > 0 ? osData[0].title : ''" readonly>
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="textarea" name="description" label="Descrição da ordem" labelPlacement="floating"
+                [value]="osData.length > 0 ? osData[0].description : ''">
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" name="brand" label="Marca da máquina" labelPlacement="floating"
+                [value]="osData.length > 0 ? osData[0].brand : ''">
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" name="machine" label="Máquina" labelPlacement="floating"
+                [value]="osData.length > 0 ? osData[0].machine : ''">
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" name="priority" label="Prioridade" labelPlacement="floating"
+                [value]="osData.length > 0 ? osData[0].priority : ''">
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" name="createdAt" label="Criado em" labelPlacement="floating"
+                [value]="osData.length| date: 'dd/MM/yyyy HH:mm:ss'">
+              </ion-input>
+            </ion-item>
+            <!-- <ion-item>
+              <ion-input type="text" name="daymaintenance" label="Manutenção em" labelPlacement="floating"
+                [value]="osData?.daymaintenance | date: 'dd/MM/yyyy'" readonly>
+              </ion-input>
+            </ion-item> -->
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  <ion-row>
+    <ion-col size-md="6" offset-md="3">
+      <ion-button type="submit" color="primary" expand="block">
+        Atualizar ordem
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

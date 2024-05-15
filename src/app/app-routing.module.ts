@@ -13,10 +13,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthPageModule)
   },
   {
-    path: 'details',
-    loadChildren: () => import('./pages/details/details.module').then(m => m.DetailsPageModule)
-  },
-  {
     path: 'register',
     loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
   },
@@ -35,6 +31,10 @@ const routes: Routes = [
   {
     path: 'faq',
     loadChildren: () => import('./shared/components/faq/faq.module').then(m => m.FaqPageModule)
+  },
+  {
+    path: 'list-order',
+    loadChildren: () => import('./pages/tabs/list-order/list-order.module').then(m => m.ListOrderPageModule)
   },
 ];
 

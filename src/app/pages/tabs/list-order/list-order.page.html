@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Todas as suas ordens</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar show-clear-button="always" value="Always Show" [(ngModel)]="searchTerm"
+      (ionChange)="searchOrders()"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- <ion-list>
+    <ion-item *ngFor="let order of filteredOrders">
+    </ion-item>
+  </ion-list> -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <ion-card *ngFor="let order of filteredOrders">
+          <ion-card-content>
+            <ion-list class="ion-no-padding">
+              <ion-item lines="none" class="ion-no-padding field">
+                <ion-label>{{ order.title }}</ion-label>
+              </ion-item>
+
+              <ion-item lines="none" class="ion-no-padding field">
+                <ion-icon name="timer-outline" color="primary" class="ion-no-margin icon"></ion-icon>
+                <ion-label>
+                  <ion-label>{{ order.priority }}</ion-label>
+                </ion-label>
+              </ion-item>
+
+              <ion-item lines="none" class="ion-no-padding field">
+                <ion-icon name="build-outline" color="primary" class="ion-no-margin icon"></ion-icon>
+                <ion-label>
+                  <ion-label>{{ order.machine }}</ion-label>
+                </ion-label>
+              </ion-item>
+
+              <ion-item lines="none" class="ion-no-padding field">
+                <ion-icon name="calendar-outline" color="primary" class="ion-no-margin icon"></ion-icon>
+                <ion-label>
+                  <ion-label>{{ order.daymaintenance | date:'dd/MM/yyyy' }}</ion-label>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -6,6 +6,7 @@ export interface Login {
 export interface LoginResponse {
   token: string;
   userId: string;
+  name: string;
   message: string;
   // cargo: string;
 }
@@ -14,7 +15,7 @@ export interface CheckUser {
   nome: string;
   email: string;
   cargo: string;
-  id_usuario: number;
+  userId: number;
 }
 
 

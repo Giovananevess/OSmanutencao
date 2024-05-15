@@ -38,6 +38,10 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'list-order',
+        loadChildren: () => import('./list-order/list-order.module').then(m => m.ListOrderPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'
