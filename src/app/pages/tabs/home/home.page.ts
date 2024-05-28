@@ -1,4 +1,3 @@
-import { CheckUser } from './../../../shared/models/auth.model';
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController, NavController } from '@ionic/angular';
 import { ModalOsPage } from 'src/app/shared/components/modal-os/modal-os.page';
@@ -29,28 +28,20 @@ export class HomePage implements OnInit {
     private navCtrl: NavController
 
   ) { }
-  ngOnInit() {
+  async ngOnInit() {
     this.loadOrders();
+    this.nomeDaConta = await this.storage.get('name');
   }
 
   async ionViewWillEnter() {
-    // await this.CheckUser();
-    this.authService.checkUser().subscribe({
-      next: async (data) => {
-        this.nomeDaConta = data.name; // Assume que 'nome' é a chave correta para o nome do usuário
-        await this.loadOrders();
-      },
-      error: (err) => {
-        console.error('Erro: ', err);
-      },
-    });
+    await this.Identify();
   }
 
   navigateToFAQPage() {
-    this.navCtrl.navigateForward('/faq'); // Navega para a página FAQPage
+    this.navCtrl.navigateForward('/faq');
   }
   navigateToOrdersPage() {
-    this.navCtrl.navigateForward('/list-order'); // Navega para a página LisOrderPage
+    this.navCtrl.navigateForward('/list-order');
   }
 
   async loadOrders() {
@@ -65,11 +56,10 @@ export class HomePage implements OnInit {
     });
   }
 
-  private async CheckUser() {
-    this.authService.checkUser().subscribe({
+  private async Identify() {
+    this.authService.identify().subscribe({
       next: async (data) => {
-        await this.storage.set('role', data.cargo);
-        await this.storage.set('name', data.nome);
+        await this.storage.set('name', data.name);
         await this.storage.set('userId', data.userId);
         await this.storage.set('email', data.email);
         await this.loadOrders();
@@ -112,6 +102,7 @@ export class HomePage implements OnInit {
 
 
 
+
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'A Short Title Is Best',
@@ -120,7 +111,6 @@ export class HomePage implements OnInit {
       buttons: ['Fechar'],
       // position: 'top',
     });
-
     await alert.present();
   }
 }

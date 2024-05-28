@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { Login, LoginResponse } from '../models/auth.model';
+import { Identify, Login, LoginResponse } from '../models/auth.model';
+import { UpdateUser } from '../models/user';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,9 @@ export class AuthService {
   private isAuthenticatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private storageService: StorageService,
+  ) { }
 
   public setIsAuthenticated(value: boolean): void {
     this.isAuthenticatedSubject.next(value);
@@ -28,6 +32,7 @@ export class AuthService {
     return this.http.post<LoginResponse>(`${this.API}/users/login`, login).pipe(
       tap(response => {
         if (response && response.token && response.userId) {
+          localStorage.setItem('token', response.token); // Armazena o token localmente
           localStorage.setItem('userId', String(response.userId));
           localStorage.setItem('name', response.name); // Armazena o nome do usuário localmente
           this.setIsAuthenticated(true);
@@ -36,15 +41,20 @@ export class AuthService {
     );
   }
 
-  checkUser(): Observable<any> {
-    return this.http.get<any>(`${this.API}/users/checkuser`);
+  editUser(values: UpdateUser, id: number): Observable<UpdateUser> {
+    console.log('Values => ', values)
+    // const token = localStorage.getItem('token');
+    // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.patch<UpdateUser>(`${this.API}/users/edit/${id}`, values);
   }
-
 
   changePassword(id: number, values: any): Observable<any> {
     return this.http.patch<any>(`${this.API}/users/password/${id}`, values);
   }
 
+  identify(): Observable<Identify> {
+    return this.http.get<Identify>(`${this.API}/users/checkuser`);
+  }
 
 
   getUserId(): number | null {
@@ -54,6 +64,8 @@ export class AuthService {
 
   getUserName(): string | null {
     return localStorage.getItem('name');
+    return localStorage.getItem('CEP');
+
   }
 
   logout(): void {

@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { ModalOsPageRoutingModule } from './modal-os-routing.module';
 
 import { ModalOsPage } from './modal-os.page';
+import { PhotoGalleryPageModule } from '../photo-gallery/photo-gallery.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ModalOsPageRoutingModule
+    ModalOsPageRoutingModule,
+    PhotoGalleryPageModule
   ],
   declarations: [ModalOsPage]
 })
-export class ModalOsPageModule {}
+export class ModalOsPageModule { }

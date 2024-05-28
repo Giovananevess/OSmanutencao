@@ -1,44 +1,47 @@
-<ion-content [fullscreen]="true" class="ion-padding content">
-  <ion-grid class="ion-margin-top ion-padding-top">
-    <ion-row>
-      <ion-col size-md="6" offset-md="3">
-        <div class="img">
-          <h2>Meu Perfil</h2>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Seu Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <form *ngIf="user" [formGroup]="formGroup" (ngSubmit)="updateUser()">
+<ion-content [fullscreen]="true" class="ion-padding content">
+  <form [formGroup]="formGroup" (ngSubmit)="updateUser()">
     <ion-grid>
       <ion-row>
         <ion-col size-md="6" offset-md="3">
           <ion-list>
             <ion-item>
-              <ion-label position="floating">Nome</ion-label>
-              <ion-input formControlName="nome"></ion-input>
+              <ion-label position="floating">Nome e sobrenome</ion-label>
+              <ion-input formControlName="name"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">E-mail</ion-label>
               <ion-input formControlName="email"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label position="floating">Telefone</ion-label>
-              <ion-input formControlName="telefone"></ion-input>
+              <ion-label position="floating">Celular</ion-label>
+              <ion-input formControlName="phone"></ion-input>
             </ion-item>
-            <!-- Se você não precisa de campos de CEP e nome da rua, você pode removê-los -->
+            <ion-item>
+              <ion-label position="floating">CEP</ion-label>
+              <ion-input formControlName="postal_code"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Nome da Rua</ion-label>
+              <ion-input formControlName="address"></ion-input>
+            </ion-item>
           </ion-list>
         </ion-col>
       </ion-row>
     </ion-grid>
-
     <ion-row>
       <ion-col size-md="6" offset-md="3">
-        <ion-button type="submit" color="primary" expand="block">
-          Atualizar
-        </ion-button>
+        <ion-button type="submit" color="primary" expand="block" (click)="updateUser()"
+          [disabled]="!userInfo">Salvar</ion-button>
       </ion-col>
     </ion-row>
   </form>
-
 </ion-content>

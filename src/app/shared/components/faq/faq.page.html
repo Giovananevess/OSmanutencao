@@ -15,50 +15,106 @@
       <ion-item slot="header" color="light">
         <ion-label>Visita tecnica</ion-label>
       </ion-item>
-      <div class="ion-padding" slot="content"><ion-list>
-          <ion-item *ngFor="let faq of faqList">
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item *ngFor="let faq of faqList1">
             <ion-label>
               <h2>{{ faq.question }}</h2>
               <p>{{ faq.answer }}</p>
             </ion-label>
           </ion-item>
-        </ion-list></div>
+        </ion-list>
+      </div>
     </ion-accordion>
     <ion-accordion value="third">
       <ion-item slot="header" color="light">
         <ion-label>Tecnicos</ion-label>
       </ion-item>
-      <div class="ion-padding" slot="content">Third Content</div>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item *ngFor="let faq of faqList2">
+            <ion-label>
+              <h2>{{ faq.question }}</h2>
+              <p>{{ faq.answer }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
     </ion-accordion>
     <ion-accordion value="second">
       <ion-item slot="header" color="light">
         <ion-label>Problemas com a ordem</ion-label>
       </ion-item>
-      <div class="ion-padding" slot="content">Second Content</div>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item *ngFor="let faq of faqList3">
+            <ion-label>
+              <h2>{{ faq.question }}</h2>
+              <p>{{ faq.answer }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
     </ion-accordion>
     <ion-accordion value="third">
       <ion-item slot="header" color="light">
         <ion-label>Peças que mais quebram</ion-label>
       </ion-item>
-      <div class="ion-padding" slot="content">Third Content</div>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item *ngFor="let faq of faqList2">
+            <ion-label>
+              <h2>{{ faq.question }}</h2>
+              <p>{{ faq.answer }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
     </ion-accordion>
     <ion-accordion value="third">
       <ion-item slot="header" color="light">
         <ion-label>Cuidado com máquina</ion-label>
       </ion-item>
-      <div class="ion-padding" slot="content">Third Content</div>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item *ngFor="let faq of faqList2">
+            <ion-label>
+              <h2>{{ faq.question }}</h2>
+              <p>{{ faq.answer }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
     </ion-accordion>
     <ion-accordion value="third">
       <ion-item slot="header" color="light">
         <ion-label>Conta</ion-label>
       </ion-item>
-      <div class="ion-padding" slot="content">Third Content</div>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item *ngFor="let faq of faqList2">
+            <ion-label>
+              <h2>{{ faq.question }}</h2>
+              <p>{{ faq.answer }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
     </ion-accordion>
     <ion-accordion value="third">
       <ion-item slot="header" color="light">
         <ion-label>Devolução de peça</ion-label>
       </ion-item>
-      <div class="ion-padding" slot="content">Third Content</div>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item *ngFor="let faq of faqList2">
+            <ion-label>
+              <h2>{{ faq.question }}</h2>
+              <p>{{ faq.answer }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
     </ion-accordion>
   </ion-accordion-group>
 

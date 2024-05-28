@@ -7,14 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { NewOsPageRoutingModule } from './new-os-routing.module';
 
 import { NewOsPage } from './new-os.page';
+import { PhotoGalleryPage } from 'src/app/shared/components/photo-gallery/photo-gallery.page';
+import { PhotoGalleryPageModule } from 'src/app/shared/components/photo-gallery/photo-gallery.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    NewOsPageRoutingModule
+    NewOsPageRoutingModule,
+    PhotoGalleryPageModule,
   ],
   declarations: [NewOsPage]
 })
-export class NewOsPageModule {}
+export class NewOsPageModule { }

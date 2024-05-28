@@ -1,11 +1,9 @@
+import { Identify } from './../../../shared/models/auth.model';
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/shared/services/user.service';
-import { User } from 'src/app/shared/models/user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MessageToastService } from 'src/app/shared/services/messageToast.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/shared/services/auth.service'; // Importe o AuthService
-import { Subscription } from 'rxjs';
+import { User } from 'src/app/shared/models/user';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-profile-users',
@@ -15,87 +13,75 @@ import { Subscription } from 'rxjs';
 export class ProfileUsersPage implements OnInit {
 
   formGroup!: FormGroup;
-  user?: User;
-  saved: boolean = false;
-  userIdSubscription!: Subscription; // Adicione uma variável de inscrição
+  userInfo!: Identify; // Armazenará as informações do usuário logado
+  password_type: string = 'password';
 
   constructor(
+    private authService: AuthService,
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private messageToastService: MessageToastService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authService: AuthService // Injete o AuthService
   ) { }
 
   ngOnInit(): void {
-    const userId = this.authService.getUserId(); // Use o método getUserId do AuthService para obter o ID do usuário
-    console.log('ID do usuário recuperado do localStorage:', userId);
-    if (userId) {
-      this.userService.getUserById(String(userId)).subscribe(
-        (user) => {
-          this.user = user;
-          this.initForm();
-        },
-        (error) => {
-          console.error('Erro ao obter usuário:', error);
-        }
-      );
-    } else {
-      console.error('ID do usuário não encontrado no localStorage');
-    }
+    this.initializeForm(); // Inicialize o formulário primeiro
+    this.loadUserInfo(); // Carregue as informações do usuário
+    console.log(this.loadUserInfo)
   }
 
-
-  ngOnDestroy(): void {
-    if (this.userIdSubscription) {
-      this.userIdSubscription.unsubscribe(); // Certifique-se de cancelar a inscrição ao destruir o componente
-    }
+  togglePasswordMode() {
+    this.password_type = this.password_type === 'text' ? 'password' : 'text';
   }
 
-  initForm() {
+  initializeForm() {
     this.formGroup = this.formBuilder.group({
-      nome: [this.user?.nome, [Validators.required, Validators.minLength(3)]],
-      email: [this.user?.email, [Validators.required, Validators.email]],
-      telefone: [this.user?.phone, [Validators.required]],
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required]], // Adicionado phone
+      postal_code: ['', [Validators.required]], // Adicionado postal_code
+      address: ['', [Validators.required]], // Adicionado address
     });
+  }
 
-    this.formGroup.patchValue({
-      nome: this.user?.nome,
-      email: this.user?.email,
-      telefone: this.user?.phone,
+  loadUserInfo() {
+    this.authService.identify().subscribe({
+      next: (res: Identify) => {
+        console.log('Usuário carregado:', res);
+        this.userInfo = res; // Acessa a propriedade `user` dentro da resposta
+        // Preenche o formulário com as informações do usuário
+        this.formGroup.patchValue({
+          name: this.userInfo.name || '',
+          email: this.userInfo.email || '',
+          phone: this.userInfo.phone || '',
+          postal_code: this.userInfo.postal_code || '',
+          address: this.userInfo.address || '',
+        });
+      },
+      error: (err) => {
+        console.error('Erro ao carregar informações do usuário:', err);
+      }
     });
   }
 
   updateUser() {
-    if (!this.user) {
-      console.error('Usuário não encontrado');
-      return;
-    }
-
-    if (this.formGroup.valid && this.formGroup.value) {
-      const userId = Number(this.user!.id); // Convertendo o userId para number
-
-      this.userService.editUser(this.formGroup.value, userId).subscribe({
-        next: (user) => {
-          console.log('Usuário atualizado com sucesso =>', user)
-          this.saved = true
-          this.formGroup.reset()
-          this.formGroup.patchValue({
-            nome: user.nome,
-            email: user.email,
-            phone: user.phone
-          });
-          this.messageToastService.showMessage('Usuário atualizado com sucesso!');
-          setTimeout(() => {
-            return this.router.navigate(['/users'], { relativeTo: this.route })
-          }, 2000)
-        },
-        error: (erro) => {
-          console.error('Erro => ', erro)
-          this.messageToastService.showMessage(erro.error.message || `Ocorreu um erro ao atualizar o usuário.`);
-        }
-      })
+    if (this.formGroup.valid) {
+      const userData = this.formGroup.value;
+      if (this.userInfo && this.userInfo.id) {
+        const userId = this.userInfo.id;
+        console.log('Atualizando usuário com ID:', userId);
+        this.userService.editUser(userId, userData).subscribe(
+          (response) => {
+            console.log('Usuário atualizado com sucesso', response);
+            this.userInfo = { ...this.userInfo, ...userData };
+          },
+          (error) => {
+            console.error('Erro ao atualizar usuário', error);
+          }
+        );
+      } else {
+        console.error('Informações do usuário não carregadas corretamente.');
+        // Exibe uma mensagem de erro para o usuário
+        alert('Informações do usuário não carregadas corretamente. Por favor, tente novamente.');
+      }
     }
   }
 }

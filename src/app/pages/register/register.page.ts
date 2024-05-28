@@ -32,7 +32,7 @@ export class RegisterPage implements OnInit, OnDestroy {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required],
-      cep: ['', Validators.required],
+      postal_code: ['', Validators.required],
       phone: ['', Validators.required],
       password: ['', Validators.required],
       confirmpassword: ['', Validators.required]

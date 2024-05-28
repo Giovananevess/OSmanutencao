@@ -16,22 +16,9 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  checkUser(filter?: string, value?: string | number): Observable<User[]> {
-    let params = new HttpParams();
 
-    if (filter && value) {
-      params = params.set(filter as string, value);
-    }
-
-    return this.http.get<User[]>(`${this.API}/users/`, { params: params }).pipe(
-      tap((users) => {
-        this.userSubject.next(users);
-      }),
-      catchError((error) => {
-        console.error('Erro ao obter usuários:', error);
-        throw error;
-      })
-    );
+  findMe(): Observable<User> {
+    return this.http.get<User>(`${this.API}/users/me`);
   }
 
   register(values: Register): Observable<Register> {
@@ -43,10 +30,29 @@ export class UserService {
     );
   }
 
-  editUser(values: UpdateUser, id: number): Observable<UpdateUser> {
-    console.log('Values => ', values)
-    return this.http.patch<UpdateUser>(`${this.API}/users/edit/${id}`, values);
+  editUser(userId: number, userData: any): Observable<any> {
+    const url = `${this.API}/users/edit/${userId}`;
+    return this.http.patch(url, userData).pipe(
+      catchError((error) => {
+        console.error('Erro ao editar usuário:', error);
+        throw error;
+      })
+    );
   }
+
+  // editUser(values: UpdateUser, id: number): Observable<UpdateUser> {
+  //   console.log('Values => ', values)
+  //   return this.http.patch<UpdateUser>(`${this.API}/users/edit/${id}`, values);
+  // }
+  // editUser(userId: string, userData: any): Observable<User> {
+  //   const url = `${this.API}/users/edit/${userId}`;
+  //   return this.http.patch<User>(url, userData).pipe(
+  //     catchError((error) => {
+  //       console.error('Erro ao editar usuário:', error);
+  //       throw error;
+  //     })
+  //   );
+  // }
 
   getUsuarioLogs(values?: any): Observable<UserLogs[]> {
     let params = new HttpParams();
@@ -70,16 +76,4 @@ export class UserService {
       })
     );
   }
-
-  // editUser(userId: string, userData: any): Observable<User> {
-  //   const url = `${this.API}/users/edit/${userId}`;
-  //   return this.http.patch<User>(url, userData).pipe(
-  //     catchError((error) => {
-  //       console.error('Erro ao editar usuário:', error);
-  //       throw error;
-  //     })
-  //   );
-
-
-
 }

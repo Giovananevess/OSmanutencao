@@ -8,7 +8,7 @@ import { PhotoService } from '../../services/photo.service';
 })
 export class PhotoGalleryPage implements OnInit {
 
-  @Output() imagePick = new EventEmitter<string | File>();
+  @Output() images = new EventEmitter<string | File>();
 
   constructor(
     public photoService: PhotoService
@@ -19,7 +19,7 @@ export class PhotoGalleryPage implements OnInit {
 
   async addPhotoToGallery() {
     await this.photoService.addNewToGallery();
-    this.imagePick.emit(this.photoService.photos as any);
+    this.images.emit(this.photoService.photos as any);
   }
 
 }

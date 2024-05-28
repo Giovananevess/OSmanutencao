@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PopoverController, ToastController } from '@ionic/angular';
-import { Order } from 'src/app/shared/models/order';
+import { ToastController } from '@ionic/angular';
 import { OrderService } from 'src/app/shared/services/order.service';
 
 @Component({
@@ -12,38 +11,45 @@ import { OrderService } from 'src/app/shared/services/order.service';
 export class NewOsPage implements OnInit {
 
   orders: any[] = [{}]; // Inicializa com um formulário
-  dateTime: any;
   uploadedImages: any[] = [];
-
-  addOrder() {
-    this.orders.push({});
-    // this.orders.push({} as Order);
-  }
 
   constructor(
     private orderService: OrderService,
     private toastController: ToastController,
     private router: Router,
-    public popoverController: PopoverController,
   ) { }
 
   ngOnInit() {
   }
 
-  async openDatePicker() {
-    await this.dateTime.open();
+  addOrder() {
+    this.orders.push({});
   }
 
+  // onImagePick(images: any) {
+  //   for (let image of images) {
+  //     console.log('event: ', image.filepath);
+  //     this.uploadedImages.push(image);
+  //   }
+  // }
 
   onImagePick(images: any) {
     for (let image of images) {
-      console.log('event: ', image.filepath);
       this.uploadedImages.push(image);
     }
   }
 
+  addImage(image: any) {
+    this.uploadedImages.push(image);
+  }
+
   async criarChamado(): Promise<void> {
     try {
+      if (!this.isValidOrders()) {
+        this.mostrarToast('Preencha todos os campos obrigatórios');
+        return;
+      }
+
       for (const order of this.orders) {
         const formData = new FormData();
         formData.append('title', order.title);
@@ -53,12 +59,11 @@ export class NewOsPage implements OnInit {
         formData.append('daymaintenance', order.daymaintenance);
         formData.append('machine', order.machine);
 
-        // Adicione aqui a lógica para adicionar as imagens ao formData
-        // formData.append('images', image);
-
-        // for (const image of image) { // Altere de 'images' para 'image' aqui
-        //   formData.append('image', image);
-        // }
+        if (this.uploadedImages.length > 0) {
+          for (const image of this.uploadedImages) {
+            formData.append('images[]', image);
+          }
+        }
 
         await this.orderService.create(formData).toPromise();
       }
@@ -70,22 +75,20 @@ export class NewOsPage implements OnInit {
     }
   }
 
-
-  // onFileSelected(event: any, order: Order): void {
-  //   if (event.target.files && event.target.files.length > 0) {
-  //     const file = event.target.files[0];
-  //     order.images = [file];
-  //   }
-  // }
-
-
-
-  async mostrarToast(mensagem: string): Promise<void> {
-    const toast = await this.toastController.create({
-      message: mensagem,
-      duration: 2000
-    });
-    toast.present();
+  isValidOrders(): boolean {
+    return this.orders.every(order =>
+      order.title && order.description && order.priority && order.brand && order.daymaintenance && order.machine
+    );
   }
 
+  async mostrarToast(mensagem: string): Promise<void> {
+    await this.toastController.create({
+      message: mensagem,
+      duration: 2000
+    }).then(toastEl => {
+      toastEl.present();
+    }).then(() => {
+      this.router.navigate(['/tabs/home'])
+    })
+  }
 }

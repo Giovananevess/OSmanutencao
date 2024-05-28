@@ -34,7 +34,7 @@ export class ListOrderPage implements OnInit {
   searchOrders() {
     console.log('Search term:', this.searchTerm);
     if (!this.searchTerm.trim()) {
-      this.filteredOrders = this.orders.slice(); // Cria uma cópia do array orders
+      this.filteredOrders = this.orders.slice();
       return;
     }
 

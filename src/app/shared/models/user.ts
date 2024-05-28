@@ -1,26 +1,32 @@
 export interface User {
   id: number;
-  nome: string;
+  name: string;
   email: string;
   phone: string;
   address: string;
-  image: string;
+  postal_code: string;
+  password: string;
+  confirmpassword: string;
 }
 
 export interface Register {
-  nome: string;
+  name: string;
   email: string;
   phone: string;
   address: string;
-  cep: string;
+  postal_code: string;
   password: string;
   confirmpassword: string;
 }
 
 export interface UpdateUser {
-  nome: string;
+  name: string;
   email: string;
   phone: string;
+  address: string;
+  postal_code: string;
+  password: string;
+  confirmpassword: string;
 }
 
 export interface UserLogs {

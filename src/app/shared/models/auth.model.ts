@@ -11,11 +11,28 @@ export interface LoginResponse {
   // cargo: string;
 }
 
-export interface CheckUser {
-  nome: string;
+// export interface Identify {
+//   id: number;
+//   name: string;
+//   email: string;
+//   userId: string;
+//   nome: string;
+//   phone: string;
+//   address: string;
+//   postal_code: string;
+//   password: string;
+//   confirmpassword: string;
+// }
+export interface Identify {
+  id: number;
+  name: string;
   email: string;
-  cargo: string;
-  userId: number;
+  userId: string;
+  phone: string;
+  address: string;
+  postal_code: string;
+  password?: string;
+  confirmpassword?: string;
 }
 
 

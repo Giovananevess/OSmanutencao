@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ConcludeOrders, ConcludeOsResponse, Order } from '../models/order';
+import { ConcludeOrders, ConcludeOS, ConcludeOsResponse, Order } from '../models/order';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +38,7 @@ export class OrderService {
     return this.http.get<{ orders: Order[] }>(`${this.API}/orders/myorders`);
   }
 
-
+  concludeOs(values: ConcludeOS): Observable<ConcludeOsResponse> {
+    return this.http.patch<ConcludeOsResponse>(`${this.API}/ordem-servico/concluir`, values);
+  }
 }

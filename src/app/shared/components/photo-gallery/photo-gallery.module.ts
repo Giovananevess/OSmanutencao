@@ -13,8 +13,12 @@ import { PhotoGalleryPage } from './photo-gallery.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    PhotoGalleryPageRoutingModule
+    PhotoGalleryPageRoutingModule,
+
+  ],
+  exports: [
+    PhotoGalleryPage
   ],
   declarations: [PhotoGalleryPage]
 })
-export class PhotoGalleryPageModule {}
+export class PhotoGalleryPageModule { }
